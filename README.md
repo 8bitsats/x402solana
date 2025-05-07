@@ -1,18 +1,18 @@
 ---
+# X402
 description: >-
   An AI-agentic payment protocol built on HTTP 402 and the new standard for
   internet-native payments.
----
 
-# X402
-
-Shout out the homie Lincoln, Kevin, and the whole entire Coinbase development team. Even you Jesse.
 
 What is X402? Why should you care, and how do we apply it to the real world and blockchain?
 
 ## Understanding x402: The Internet-Native Payment Revolution
 
-<figure><img src=".gitbook/assets/GqSDcYza4AAPRYZ.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/solpay.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/solpay2.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/solpay3.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/solpay4.jpeg" alt=""><figcaption></figcaption></figure>
 
 ### What is x402?
 
