@@ -13,7 +13,6 @@ import {
   SimpleGrid,
   Stack,
   Text,
-  useColorModeValue,
 } from '@chakra-ui/react';
 
 const Feature = ({ title, text, icon }: { title: string; text: string; icon: React.ReactElement }) => {
@@ -22,7 +21,7 @@ const Feature = ({ title, text, icon }: { title: string; text: string; icon: Rea
       align={'center'}
       textAlign={'center'}
       p={6}
-      bg={useColorModeValue('white', 'gray.800')}
+      bg={'white'}
       rounded={'xl'}
       boxShadow={'lg'}
     >
@@ -30,7 +29,7 @@ const Feature = ({ title, text, icon }: { title: string; text: string; icon: Rea
         {icon}
       </Box>
       <Text fontWeight={600}>{title}</Text>
-      <Text color={useColorModeValue('gray.600', 'gray.400')}>{text}</Text>
+      <Text color={'gray.600'}>{text}</Text>
     </Stack>
   );
 };
@@ -42,7 +41,7 @@ export const HomePage = () => {
         <Stack
           as={Box}
           textAlign={'center'}
-          spacing={{ base: 8, md: 14 }}
+          gap={{ base: 8, md: 14 }}
           py={{ base: 20, md: 36 }}
         >
           <Heading
@@ -61,28 +60,28 @@ export const HomePage = () => {
           </Text>
           <Stack
             direction={'column'}
-            spacing={3}
+            gap={3}
             align={'center'}
             alignSelf={'center'}
             position={'relative'}
           >
-            <Button
-              as={RouterLink}
-              to="/generate"
-              colorScheme={'brand'}
-              bg={'brand.500'}
-              rounded={'full'}
-              px={6}
-              _hover={{
-                bg: 'brand.600',
-              }}
-            >
-              Get Started
-            </Button>
+            <RouterLink to="/generate">
+              <Button
+                colorScheme={'brand'}
+                bg={'brand.500'}
+                rounded={'full'}
+                px={6}
+                _hover={{
+                  bg: 'brand.600',
+                }}
+              >
+                Get Started
+              </Button>
+            </RouterLink>
           </Stack>
         </Stack>
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={10}>
+        <SimpleGrid columns={{ base: 1, md: 3 }} gap={10} py={10}>
           <Feature
             icon={<FaPalette />}
             title={'Generate Art'}
