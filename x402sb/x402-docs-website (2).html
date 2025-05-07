@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X402 Protocol - AI-Driven Payments on Solana</title>
+    <style>
+        :root {
+            --primary: #9945FF;
+            --secondary: #14F195;
+            --accent: #00C2FF;
+            --background: #121212;
+            --surface: #1E1E1E;
+            --text: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --success: #14F195;
+            --warning: #FFD700;
+            --error: #FF6B6B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo span {
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(180deg, var(--background), var(--surface));
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            color: var(--text-secondary);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .button-primary {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: var(--text);
+            box-shadow: 0 4px 14px rgba(153, 69, 255, 0.4);
+        }
+        
+        .button-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--accent);
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(153, 69, 255, 0.6);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .architecture {
+            background-color: var(--surface);
+            padding: 5rem 0;
+        }
+        
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .architecture-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .architecture-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .architecture-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .architecture-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .component-list {
+            list-style: none;
+        }
+        
+        .component-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .component-list li::before {
+            content: "→";
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .image-generator {
+            background-color: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .image-generator h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .generator-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .generated-image {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .generated-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .docs-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .doc-card {
+            background-color: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .doc-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .doc-card p {
+            margin-bottom: 1.5rem;
+        }
+        
+        footer {
+            background-color: var(--surface);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .use-case-card {
+            background-color: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .use-case-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .use-case-card p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .image-preview {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 2rem;
+            height: 300px;
+            background-color: #2a2a2a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span>X402</span> Protocol
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#architecture">Architecture</a>
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#docs">Documentation</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/8bitsats/x402-Solana" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                    </a>
+                    <a href="https://8bit-1.gitbook.io/x402-solana/" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/0rdlibrary" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>X402: AI-Driven Payment Protocol on Solana</h1>
+            <p>A next-generation protocol enabling seamless machine-to-machine and human-to-machine payments through standard HTTP requests, empowering AI agents to autonomously pay for resources without manual intervention.</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/8bitsats/x402-Solana" class="button button-primary" target="_blank">View on GitHub</a>
+                <a href="https://8bit-1.gitbook.io/x402-solana/" class="button button-secondary" target="_blank">Read Documentation</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">💸</div>
+                    <h3>HTTP-Based Payments</h3>
+                    <p>Leverages HTTP's 402 Payment Required status code to enable seamless payment flows integrated directly into web protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Solana-Powered</h3>
+                    <p>Utilizes Solana's high-performance blockchain for fast, low-cost transactions with near-instant finality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Agent Swarm</h3>
+                    <p>Collaborative system of specialized AI agents that can autonomously negotiate, execute, and verify payments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3>E-commerce Ready</h3>
+                    <p>Seamless integration with platforms like Shopify through Helio's Solana Pay plugin for real-world transactions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Multi-Token Support</h3>
+                    <p>Compatible with SOL, USDC, and other SPL tokens, enabling flexible payment options across the ecosystem.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Intelligent Decisions</h3>
+                    <p>AI-powered payment authorization with policy controls for secure and efficient resource allocation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <h2>System Architecture</h2>
+            <div class="architecture-grid">
+                <div class="architecture-image">
+                    <img src="/api/placeholder/600/400" alt="X402 System Architecture">
+                </div>
+                <div class="architecture-content">
+                    <h3>Four-Component System</h3>
+                    <p>The X402 Protocol implements a comprehensive architecture designed for high performance, security, and flexibility:</p>
+                    <ul class="component-list">
+                        <li><strong>X402 Protocol Core:</strong> HTTP-based payment request handling, verification, and settlement</li>
+                        <li><strong>Solana Payment Infrastructure:</strong> Blockchain transaction processing with wallet management</li>
+                        <li><strong>AI Agent Swarm:</strong> Specialized agents for orchestration, payment, verification, and resource discovery</li>
+                        <li><strong>E-commerce Integrations:</strong> Shopify/Helio integration and direct merchant APIs</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="image-generator">
+                <h3>X402 Protocol Visualization with Browser Use</h3>
+                <p>Experience the X402 protocol in action through our Browser Use agent. Watch as the agent navigates the web to demonstrate protocol functionality.</p>
+                <div class="generator-controls">
+                    <div>
+                        <label for="component-select">Select Demo Scenario:</label>
+                        <select id="component-select">
+                            <option value="full">Complete Payment Flow</option>
+                            <option value="protocol">X402 Protocol Headers</option>
+                            <option value="agents">AI Agent Swarm Coordination</option>
+                            <option value="payments">Solana Transaction</option>
+                            <option value="ecommerce">Shopify Integration</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="llm-model-select">AI Model:</label>
+                        <select id="llm-model-select">
+                            <option value="claude-3-7-sonnet-20250219">Claude 3.7 Sonnet</option>
+                            <option value="gpt-4o">GPT-4o</option>
+                            <option value="gpt-4o-mini">GPT-4o Mini</option>
+                            <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                        </select>
+                    </div>
+                    <button id="generate-button" class="button button-primary">Launch Browser Agent</button>
+                    <div id="task-status" style="margin-top: 10px; display: none;">
+                        <span id="status-indicator" style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #14F195; margin-right: 8px;"></span>
+                        <span id="status-text">Agent is running...</span>
+                    </div>
+                </div>
+                
+                <div class="browser-preview" id="browser-preview" style="margin-top: 20px; display: none;">
+                    <iframe id="browser-frame" width="100%" height="500" frameborder="0"></iframe>
+                </div>
+                
+                <div class="task-output" id="task-output" style="margin-top: 20px; display: none;">
+                    <h4>Task Progress</h4>
+                    <div id="output-steps" style="height: 200px; overflow-y: auto; background: #1A1A1A; border-radius: 8px; padding: 12px; font-family: monospace; white-space: pre-wrap;"></div>
+                </div>
+                
+                <div class="image-preview" id="visualization-preview">
+                    <div>Click "Launch Browser Agent" to start an interactive demonstration</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="use-cases">
+        <div class="container">
+            <h2>Real-World Use Cases</h2>
+            <p class="section-intro">The X402 protocol enables a wide range of innovative applications across different industries:</p>
+            
+            <div class="use-cases">
+                <div class="use-case-card">
+                    <h3>AI-Powered E-commerce Assistant</h3>
+                    <p>ShopAssist uses AI agents to provide personalized shopping experiences with autonomous checkout, dynamic discounting, and NFT loyalty programs, reducing cart abandonment by 35%.</p>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                <div class="use-case-card">
+                    <h3>AI Content Marketplace</h3>
+                    <p>MicroMuse enables content creators to monetize their work through micropayments, with AI agents discovering and purchasing content on behalf of users, eliminating subscription fatigue.</p>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                <div class="use-case-card">
+                    <h3>AI Supply Chain Optimizer</h3>
+                    <p>ChainFlex streamlines complex payment flows across multiple vendors with real-time price negotiation and automated purchasing, reducing inventory costs by 15%.</p>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                <div class="use-case-card">
+                    <h3>Bitcoin-Solana Bridge Agent</h3>
+                    <p>X402 agents facilitate cross-chain liquidity between Bitcoin and Solana using zBTC and sBTC, enabling BTC holders to engage with Solana DeFi while maintaining security through advanced MPC and Taproot technologies.</p>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                <div class="use-case-card">
+                    <h3>AI Research Data Marketplace</h3>
+                    <p>DataNexus connects AI researchers with quality datasets through usage-based pricing and verifiable provenance, reducing data acquisition costs by 40%.</p>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                <div class="use-case-card">
+                    <h3>AI Travel Concierge</h3>
+                    <p>JourneyGenius autonomously researches, books, and pays for travel arrangements across multiple service providers, delivering 12% savings and 85% reduction in booking time.</p>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="docs">
+        <div class="container">
+            <h2>Documentation & Resources</h2>
+            <div class="docs-content">
+                <div class="doc-card">
+                    <h3>Developer Guide</h3>
+                    <p>Comprehensive documentation for implementing X402 in your applications, including API references, examples, and best practices.</p>
+                    <a href="https://8bit-1.gitbook.io/x402-solana/" class="button button-primary" target="_blank">Read Guide</a>
+                </div>
+                <div class="doc-card">
+                    <h3>GitHub Repository</h3>
+                    <p>Access the open-source code, contribute to the project, report issues, and collaborate with the developer community.</p>
+                    <a href="https://github.com/8bitsats/x402-Solana" class="button button-primary" target="_blank">View Code</a>
+                </div>
+                <div class="doc-card">
+                    <h3>Native Agent Integration</h3>
+                    <p>Learn how to integrate X402 with Solana agents and cross-chain bridges, enabling Bitcoin-Solana interoperability with zBTC and sBTC through our agent-driven protocols.</p>
+                    <a href="#" class="button button-primary">View Documentation</a>
+                </div>
+                <div class="doc-card">
+                    <h3>Integration Tutorials</h3>
+                    <p>Step-by-step guides for integrating X402 with various platforms, including Shopify, custom APIs, and AI frameworks.</p>
+                    <a href="#" class="button button-primary">Explore Tutorials</a>
+                </div>
+                <div class="doc-card">
+                    <h3>Sample Applications</h3>
+                    <p>Ready-to-use templates and example applications demonstrating X402 implementation for different use cases.</p>
+                    <a href="#" class="button button-primary">View Samples</a>
+                </div>
+                <div class="doc-card">
+                    <h3>Cross-Chain Bridge Developer Kit</h3>
+                    <p>Tools and libraries for building Bitcoin-to-Solana bridges utilizing X402 for secure payment processing across blockchains with agent-managed transactions.</p>
+                    <a href="#" class="button button-primary">Download Kit</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/8bitsats/x402-Solana" target="_blank">GitHub</a>
+                <a href="https://8bit-1.gitbook.io/x402-solana/" target="_blank">Documentation</a>
+                <a href="https://twitter.com/0rdlibrary" target="_blank">Twitter</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <p class="copyright">© 2025 X402 Protocol. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced script with Browser Use API integration
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateButton = document.getElementById('generate-button');
+            const visualizationPreview = document.getElementById('visualization-preview');
+            const componentSelect = document.getElementById('component-select');
+            const llmModelSelect = document.getElementById('llm-model-select');
+            const browserPreview = document.getElementById('browser-preview');
+            const browserFrame = document.getElementById('browser-frame');
+            const taskOutput = document.getElementById('task-output');
+            const outputSteps = document.getElementById('output-steps');
+            const taskStatus = document.getElementById('task-status');
+            const statusIndicator = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
+            
+            // API configuration
+            const API_KEY = 'BROWSER_USE_API_KEY'; // Replace with actual API key in production
+            const BASE_URL = 'https://api.browser-use.com/api/v1';
+            const HEADERS = {
+                'Authorization': `Bearer ${API_KEY}`,
+                'Content-Type': 'application/json'
+            };
+            
+            // Task scenarios mapped to instructions
+            const scenarioInstructions = {
+                'full': `Go to our demo site at x402-demo.solana.com and demonstrate a complete X402 payment flow:
+                        1. Browse to the premium content section
+                        2. Attempt to access a gated resource
+                        3. Show the 402 Payment Required response
+                        4. Connect a Solana wallet
+                        5. Authorize and execute the payment transaction
+                        6. Access the content after successful payment
+                        7. Explain each step of the protocol as you go
+                        Finally, summarize how the X402 protocol works end-to-end.`,
+                        
+                'protocol': `Visit our API documentation at x402-docs.solana.com and explain the X402 protocol headers:
+                           1. Show examples of the protocol's API endpoints
+                           2. Explain the structure of a 402 Payment Required response
+                           3. Demonstrate how payment headers are constructed
+                           4. Show a sample X-PAYMENT header with a Solana transaction
+                           5. Explain the verification and settlement process
+                           Finally, create a diagram showing the request-response flow with headers.`,
+                           
+                'agents': `Go to our Agent Swarm demo at x402-agents.solana.com and show how multiple AI agents coordinate:
+                         1. See the orchestrator agent assign tasks to specialized agents
+                         2. Watch the payment agent evaluate and authorize a transaction
+                         3. Observe the verification agent confirm settlement
+                         4. Show the resource agent deliver the purchased content
+                         5. Explain the agent communication and coordination
+                         Finally, show metrics on transaction speed and agent efficiency.`,
+                         
+                'payments': `Visit solana explorer at explorer.solana.com and demonstrate an X402 transaction:
+                           1. Show a sample X402 payment transaction
+                           2. Explain the transaction structure and included data
+                           3. Point out the payment recipient, amount, and resource identifier
+                           4. Show the transaction confirmation and settlement time
+                           5. Compare with traditional payment methods
+                           Finally, explain how X402 transactions maintain a record of resource access.`,
+                           
+                'ecommerce': `Go to our Shopify demo site at x402-shop.solana.com and show the e-commerce integration:
+                            1. Browse products in the demo store
+                            2. Add an item to the cart and proceed to checkout
+                            3. Select Solana Pay with X402 as the payment method
+                            4. Show the integration with Helio's payment system
+                            5. Complete the purchase with a test wallet
+                            6. Demonstrate the order confirmation and NFT receipt
+                            Finally, explain the benefits for merchants and customers.`
+            };
+            
+            // Create a browser automation task
+            async function createTask(taskType, llmModel) {
+                try {
+                    // Set task instructions based on selected scenario
+                    const instructions = scenarioInstructions[taskType] || scenarioInstructions['full'];
+                    
+                    // API request to create task
+                    const response = await fetch(`${BASE_URL}/run-task`, {
+                        method: 'POST',
+                        headers: HEADERS,
+                        body: JSON.stringify({
+                            task: instructions,
+                            llm_model: llmModel,
+                            use_adblock: true,
+                            use_proxy: true
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Failed to create task: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    return data.id;
+                } catch (error) {
+                    console.error('Error creating task:', error);
+                    return null;
+                }
+            }
+            
+            // Get task details
+            async function getTaskDetails(taskId) {
+                try {
+                    const response = await fetch(`${BASE_URL}/task/${taskId}`, {
+                        method: 'GET',
+                        headers: HEADERS
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Failed to get task details: ${response.status}`);
+                    }
+                    
+                    return await response.json();
+                } catch (error) {
+                    console.error('Error getting task details:', error);
+                    return null;
+                }
+            }
+            
+            // Show task status (with color coding)
+            function updateStatusIndicator(status) {
+                statusText.textContent = `Agent is ${status}`;
+                
+                switch (status) {
+                    case 'running':
+                        statusIndicator.style.backgroundColor = '#14F195'; // Green
+                        break;
+                    case 'paused':
+                        statusIndicator.style.backgroundColor = '#FFD700'; // Yellow
+                        break;
+                    case 'finished':
+                        statusIndicator.style.backgroundColor = '#00C2FF'; // Blue
+                        break;
+                    case 'failed':
+                    case 'stopped':
+                        statusIndicator.style.backgroundColor = '#FF6B6B'; // Red
+                        break;
+                    default:
+                        statusIndicator.style.backgroundColor = '#AAAAAA'; // Gray
+                }
+            }
+            
+            // Update task steps in the UI
+            function updateTaskSteps(steps) {
+                outputSteps.innerHTML = '';
+                
+                steps.forEach((step, index) => {
+                    const stepElement = document.createElement('div');
+                    stepElement.className = 'task-step';
+                    stepElement.innerHTML = `
+                        <div style="color: var(--accent); margin-bottom: 4px;">Step ${index + 1}: ${step.next_goal || 'Initializing...'}</div>
+                        <div style="color: var(--text-secondary); margin-bottom: 12px; font-size: 0.9em;">${step.evaluation_previous_goal || ''}</div>
+                    `;
+                    outputSteps.appendChild(stepElement);
+                });
+                
+                // Auto-scroll to the bottom
+                outputSteps.scrollTop = outputSteps.scrollHeight;
+            }
+            
+            // Poll task status and update UI
+            async function pollTaskStatus(taskId) {
+                let previousStepCount = 0;
+                
+                const pollInterval = setInterval(async () => {
+                    const details = await getTaskDetails(taskId);
+                    
+                    if (!details) {
+                        clearInterval(pollInterval);
+                        return;
+                    }
+                    
+                    // Update status
+                    updateStatusIndicator(details.status);
+                    
+                    // Update steps if new ones are available
+                    if (details.steps.length > previousStepCount) {
+                        updateTaskSteps(details.steps);
+                        previousStepCount = details.steps.length;
+                    }
+                    
+                    // If task is complete, show final output
+                    if (['finished', 'failed', 'stopped'].includes(details.status)) {
+                        clearInterval(pollInterval);
+                        
+                        if (details.output) {
+                            // Create a final output section
+                            const finalOutput = document.createElement('div');
+                            finalOutput.innerHTML = `
+                                <div style="margin-top: 20px; border-top: 1px solid var(--accent); padding-top: 10px;">
+                                    <h4 style="color: var(--secondary);">Final Output:</h4>
+                                    <div style="white-space: pre-wrap;">${details.output}</div>
+                                </div>
+                            `;
+                            outputSteps.appendChild(finalOutput);
+                            outputSteps.scrollTop = outputSteps.scrollHeight;
+                        }
+                    }
+                }, 2000); // Poll every 2 seconds
+            }
+            
+            // Pause the running task
+            async function pauseTask(taskId) {
+                try {
+                    const response = await fetch(`${BASE_URL}/pause-task?task_id=${taskId}`, {
+                        method: 'PUT',
+                        headers: HEADERS
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Failed to pause task: ${response.status}`);
+                    }
+                    
+                    updateStatusIndicator('paused');
+                    return true;
+                } catch (error) {
+                    console.error('Error pausing task:', error);
+                    return false;
+                }
+            }
+            
+            // Resume the paused task
+            async function resumeTask(taskId) {
+                try {
+                    const response = await fetch(`${BASE_URL}/resume-task?task_id=${taskId}`, {
+                        method: 'PUT',
+                        headers: HEADERS
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Failed to resume task: ${response.status}`);
+                    }
+                    
+                    updateStatusIndicator('running');
+                    return true;
+                } catch (error) {
+                    console.error('Error resuming task:', error);
+                    return false;
+                }
+            }
+            
+            // Stop the running task
+            async function stopTask(taskId) {
+                try {
+                    const response = await fetch(`${BASE_URL}/stop-task?task_id=${taskId}`, {
+                        method: 'PUT',
+                        headers: HEADERS
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Failed to stop task: ${response.status}`);
+                    }
+                    
+                    updateStatusIndicator('stopped');
+                    return true;
+                } catch (error) {
+                    console.error('Error stopping task:', error);
+                    return false;
+                }
+            }
+            
+            // Add control buttons for the browser agent
+            function addControlButtons(taskId) {
+                const controlsContainer = document.createElement('div');
+                controlsContainer.className = 'browser-controls';
+                controlsContainer.style.cssText = 'display: flex; gap: 10px; margin-top: 10px;';
+                
+                // Pause/Resume button
+                const pauseResumeBtn = document.createElement('button');
+                pauseResumeBtn.className = 'button button-secondary';
+                pauseResumeBtn.textContent = 'Pause Agent';
+                pauseResumeBtn.setAttribute('data-state', 'running');
+                
+                pauseResumeBtn.addEventListener('click', async () => {
+                    const currentState = pauseResumeBtn.getAttribute('data-state');
+                    
+                    if (currentState === 'running') {
+                        if (await pauseTask(taskId)) {
+                            pauseResumeBtn.textContent = 'Resume Agent';
+                            pauseResumeBtn.setAttribute('data-state', 'paused');
+                        }
+                    } else {
+                        if (await resumeTask(taskId)) {
+                            pauseResumeBtn.textContent = 'Pause Agent';
+                            pauseResumeBtn.setAttribute('data-state', 'running');
+                        }
+                    }
+                });
+                
+                // Stop button
+                const stopBtn = document.createElement('button');
+                stopBtn.className = 'button button-secondary';
+                stopBtn.style.backgroundColor = 'rgba(255, 107, 107, 0.2)';
+                stopBtn.style.borderColor = '#FF6B6B';
+                stopBtn.textContent = 'Stop Agent';
+                
+                stopBtn.addEventListener('click', async () => {
+                    if (confirm('Are you sure you want to stop the agent? This cannot be undone.')) {
+                        if (await stopTask(taskId)) {
+                            pauseResumeBtn.disabled = true;
+                            stopBtn.disabled = true;
+                        }
+                    }
+                });
+                
+                controlsContainer.appendChild(pauseResumeBtn);
+                controlsContainer.appendChild(stopBtn);
+                
+                // Add controls after the status indicator
+                taskStatus.parentNode.insertBefore(controlsContainer, taskStatus.nextSibling);
+            }
+            
+            // Main function to start the browser agent
+            generateButton.addEventListener('click', async function() {
+                const component = componentSelect.value;
+                const llmModel = llmModelSelect.value;
+                
+                // Hide visualization preview
+                visualizationPreview.style.display = 'none';
+                
+                // Show status indicator
+                taskStatus.style.display = 'block';
+                updateStatusIndicator('initializing');
+                
+                // Create the task
+                const taskId = await createTask(component, llmModel);
+                
+                if (!taskId) {
+                    visualizationPreview.innerHTML = '<div style="color: var(--error);">Failed to create browser agent. Please try again later.</div>';
+                    visualizationPreview.style.display = 'block';
+                    taskStatus.style.display = 'none';
+                    return;
+                }
+                
+                // Get initial task details
+                const taskDetails = await getTaskDetails(taskId);
+                
+                if (!taskDetails || !taskDetails.live_url) {
+                    visualizationPreview.innerHTML = '<div style="color: var(--error);">Failed to get browser preview URL. Please try again later.</div>';
+                    visualizationPreview.style.display = 'block';
+                    taskStatus.style.display = 'none';
+                    return;
+                }
+                
+                // Show browser preview
+                browserFrame.src = taskDetails.live_url;
+                browserPreview.style.display = 'block';
+                
+                // Show task output
+                taskOutput.style.display = 'block';
+                
+                // Add control buttons
+                addControlButtons(taskId);
+                
+                // Start polling for updates
+                pollTaskStatus(taskId);
+            });
+        });
+    </script>
+</body>
+</html>
